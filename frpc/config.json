@@ -1,0 +1,50 @@
+{
+    "name": "FRP Client",
+    "version": "0.35.1",
+    "slug": "frpc",
+    "description": "A FRP client for Hass.io (self-hosted ngrok alternative)",
+    "webui": "http://[HOST]:[PORT:7400]",
+    "url": "https://github.com/devova/hassio-frp-addons",
+    "arch": [
+      "aarch64"
+    ],
+    "startup": "system",
+    "boot": "auto",
+    "ports": {
+      "7400/tcp": "7400"
+    },
+    "ports_description": {
+      "7400/tcp": "Web interface"
+    },
+    "options": {
+      "log_level": "info",
+      "token": "",
+      "server_addr": "",
+      "server_port": "7000",
+      "tunnels": [
+        {
+          "name": "ngnix_proxy",
+          "proto": "https",
+          "local_ip": "core-nginx-proxy",
+          "local_port": 443,
+          "subdomain": "home"
+        }
+      ]
+    },
+    "schema": {
+      "log_level": "list(crit|warn|error|info|debug)",
+      "token": "str?",
+      "server_addr": "^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+      "server_port": "int",
+      "tunnels": [
+        {
+          "name": "str",
+          "proto": "list(https|http|tcp)",
+          "local_ip": "str",
+          "local_port": "int",
+          "subdomain": "str"
+        }
+      ]
+    },
+    "image": "devova/{arch}-hassio-frpc"
+  }
