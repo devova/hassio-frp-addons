@@ -3,8 +3,6 @@
     "version": "0.35.1",
     "slug": "frpc",
     "description": "A FRP client for Hass.io (self-hosted ngrok alternative)",
-    "webui": "http://[HOST]:[PORT:8099]",
-    "ingress": true,
     "arch": [
       "aarch64",
       "amd64",
@@ -15,10 +13,12 @@
     "startup": "application",
     "boot": "auto",
     "ports": {
-      "8099/tcp": "8099"
+      "8099/tcp": "8099",
+      "7001/udp": "7001"
     },
     "ports_description": {
-      "8099/tcp": "Web interface"
+      "8099/tcp": "API, e.g. curl http://homeassistant.local:8099/api/status -u admin:admin",
+      "7001/udp": "Required for P2P Mode (type=xtcp)"
     },
     "options": {
       "log_level": "info",
@@ -34,7 +34,24 @@
           "local_ip": "core-nginx-proxy",
           "local_port": 443,
           "subdomain": "home"
+        },
+        {
+          "name": "p2p_home_assistant",
+          "type": "xtcp",
+          "local_ip": "homeassistant",
+          "local_port": 8123,
+          "sk": "some-random-key"
+        },
+        {
+          "name": "p2p_home_assistant_visitor",
+          "type": "xtcp",
+          "role": "visitor",
+          "server_name": "p2p_home_assistant",
+          "sk": "some-random-key",
+          "bind_addr":  "127.0.0.1",
+          "bind_port": 8123
         }
+
       ]
     },
     "schema": {
@@ -47,10 +64,15 @@
       "tunnels": [
         {
           "name": "str",
-          "type": "list(https|http|tcp|udp)",
-          "local_ip": "str",
-          "local_port": "int",
-          "subdomain": "str?"
+          "type": "list(https|http|tcp|udp|xtcp)",
+          "local_ip": "str?",
+          "local_port": "int?",
+          "subdomain": "str?",
+          "sk": "str?",
+          "role": "str?",
+          "server_name": "str?",
+          "bind_addr": "str?",
+          "bind_port": "int?"
         }
       ]
     }
