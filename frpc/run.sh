@@ -26,41 +26,41 @@ for id in $(bashio::config "tunnels|keys"); do
   type=$(bashio::config "tunnels[${id}].type")
   echo "type = $type" >> $configPath
   local_ip=$(bashio::config "tunnels[${id}].local_ip")
-  if bashio::var.has_value "$(dig +short ${local_ip})"; then
-    echo "local_ip = $(dig +short ${local_ip})" >> $configPath
-  else
-    if bashio::var.has_value "${local_ip}"; then
+  if bashio::var.has_value "${local_ip}"; then
+    if bashio::var.has_value "$(dig +short ${local_ip})"; then
+      echo "local_ip = $(dig +short ${local_ip})" >> $configPath
+    else
       echo "local_ip = ${local_ip}" >> $configPath
     fi
   fi
   local_port=$(bashio::config "tunnels[${id}].local_port")
-  if bashio::var.has_value $local_port; then
+  if bashio::var.has_value "${local_port}"; then
     echo "local_port = ${local_port}" >> $configPath
   fi
   subdomain=$(bashio::config "tunnels[${id}].subdomain")
-  if bashio::var.has_value $subdomain; then
+  if bashio::var.has_value "${subdomain}"; then
     echo "subdomain = ${subdomain}" >> $configPath
   fi
   echo "use_encryption = true" >> $configPath
   echo "use_compression = true" >> $configPath
   sk=$(bashio::config "tunnels[${id}].sk")
-  if bashio::var.has_value $sk; then
+  if bashio::var.has_value "${sk}"; then
     echo "sk = ${sk}" >> $configPath
   fi
   role=$(bashio::config "tunnels[${id}].role")
-  if bashio::var.has_value $role; then
+  if bashio::var.has_value "${role}"; then
     echo "role = ${role}" >> $configPath
   fi
   server_name=$(bashio::config "tunnels[${id}].server_name")
-  if bashio::var.has_value $server_name; then
+  if bashio::var.has_value "${server_name}"; then
     echo "server_name = ${server_name}" >> $configPath
   fi
   bind_addr=$(bashio::config "tunnels[${id}].bind_addr")
-  if bashio::var.has_value $bind_addr; then
+  if bashio::var.has_value "${bind_addr}"; then
     echo "bind_addr = ${bind_addr}" >> $configPath
   fi
   bind_port=$(bashio::config "tunnels[${id}].bind_port")
-  if bashio::var.has_value $bind_port; then
+  if bashio::var.has_value "${bind_port}"; then
     echo "bind_port = ${bind_port}" >> $configPath
   fi
 done
