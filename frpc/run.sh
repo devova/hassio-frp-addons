@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-bashio::log.info "(0.35.1-rc10) Building frpc.ini..."
+bashio::log.info "(0.35.1-rc11) Building frpc.ini..."
 configPath="/frpc.ini"
 if bashio::fs.file_exists $configPath; then
   rm $configPath
