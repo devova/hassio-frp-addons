@@ -35,11 +35,13 @@ for id in $(bashio::config "tunnels|keys"); do
   fi
   local_port=$(bashio::config "tunnels[${id}].local_port")
   if bashio::var.is_empty $local_port; then
+    bashio::log.debug "Skip key"
   else
     echo "local_port = ${local_port}" >> $configPath
   fi
   subdomain=$(bashio::config "tunnels[${id}].subdomain")
   if bashio::var.is_empty $subdomain; then
+    bashio::log.debug "Skip key"
   else
     echo "subdomain = ${subdomain}" >> $configPath
   fi
@@ -47,26 +49,31 @@ for id in $(bashio::config "tunnels|keys"); do
   echo "use_compression = true" >> $configPath
   sk=$(bashio::config "tunnels[${id}].sk")
   if bashio::var.is_empty $sk; then
+    bashio::log.debug "Skip key"
   else
     echo "sk = ${sk}" >> $configPath
   fi
   role=$(bashio::config "tunnels[${id}].role")
   if bashio::var.is_empty $role; then
+    bashio::log.debug "Skip key"
   else
     echo "role = ${role}" >> $configPath
   fi
   server_name=$(bashio::config "tunnels[${id}].server_name")
   if bashio::var.is_empty $server_name; then
+    bashio::log.debug "Skip key"
   else
     echo "server_name = ${server_name}" >> $configPath
   fi
   bind_addr=$(bashio::config "tunnels[${id}].bind_addr")
   if bashio::var.is_empty $bind_addr; then
+    bashio::log.debug "Skip key"
   else
     echo "bind_addr = ${bind_addr}" >> $configPath
   fi
   bind_port=$(bashio::config "tunnels[${id}].bind_port")
   if bashio::var.is_empty $bind_port; then
+    bashio::log.debug "Skip key"
   else
     echo "bind_port = ${bind_port}" >> $configPath
   fi
