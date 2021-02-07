@@ -37,6 +37,10 @@ for id in $(bashio::config "tunnels|keys"); do
   if [ $local_port != "null" ]; then
     echo "local_port = ${local_port}" >> $configPath
   fi
+  remote_port=$(bashio::config "tunnels[${id}].remote_port")
+  if [ $remote_port != "null" ]; then
+    echo "remote_port = ${remote_port}" >> $configPath
+  fi
   subdomain=$(bashio::config "tunnels[${id}].subdomain")
   if [ $subdomain != "null" ]; then
     echo "subdomain = ${subdomain}" >> $configPath

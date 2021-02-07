@@ -14,13 +14,11 @@
     "boot": "auto",
     "ports": {
       "8099/tcp": "8099",
-      "8123/tcp": "8123",
-      "7001/udp": "7001"
+      "8123/tcp": "8123"
     },
     "ports_description": {
       "8099/tcp": "API, e.g. curl http://homeassistant.local:8099/api/status -u admin:admin",
-      "8123/tcp": "Remote Home Assistant",
-      "7001/udp": "Required for P2P Mode (type=xtcp)"
+      "8123/tcp": "Remote Home Assistant Instance"
     },
     "options": {
       "log_level": "info",
@@ -69,6 +67,7 @@
           "type": "list(https|http|tcp|udp|xtcp)",
           "local_ip": "str?",
           "local_port": "int?",
+          "remote_port": "int?",
           "subdomain": "str?",
           "sk": "str?",
           "role": "str?",
