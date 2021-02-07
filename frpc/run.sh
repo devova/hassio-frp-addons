@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-bashio::log.info "(0.35.1-rc7) Building frpc.ini..."
+bashio::log.info "(0.35.1-rc8) Building frpc.ini..."
 configPath="/frpc.ini"
 if bashio::fs.file_exists $configPath; then
   rm $configPath
@@ -26,8 +26,8 @@ for id in $(bashio::config "tunnels|keys"); do
   type=$(bashio::config "tunnels[${id}].type")
   echo "type = $type" >> $configPath
   local_ip=$(bashio::config "tunnels[${id}].local_ip")
-  [ ! -z "$local_ip" ] && echo "local_ip Not NULL" || echo "local_ip NULL"
-  if [ "$([ ! -z "$local_ip" ] && echo "Not NULL" || echo "NULL")" != "NULL" ]; then
+  echo "local_ip ${local_ip}"
+  if [ $local_ip != "null" ]; then
     if bashio::var.has_value "$(dig +short ${local_ip})"; then
       echo "local_ip = $(dig +short ${local_ip})" >> $configPath
     else
