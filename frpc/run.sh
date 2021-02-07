@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-bashio::log.info "(0.35.1-rc9) Building frpc.ini..."
+bashio::log.info "(0.35.1-rc10) Building frpc.ini..."
 configPath="/frpc.ini"
 if bashio::fs.file_exists $configPath; then
   rm $configPath
@@ -26,7 +26,6 @@ for id in $(bashio::config "tunnels|keys"); do
   type=$(bashio::config "tunnels[${id}].type")
   echo "type = $type" >> $configPath
   local_ip=$(bashio::config "tunnels[${id}].local_ip")
-  echo "local_ip ${local_ip}"
   if [ $local_ip != "null" ]; then
     if bashio::var.has_value "$(dig +short ${local_ip})"; then
       echo "local_ip = $(dig +short ${local_ip})" >> $configPath
@@ -36,46 +35,32 @@ for id in $(bashio::config "tunnels|keys"); do
   fi
   local_port=$(bashio::config "tunnels[${id}].local_port")
   if [ $local_port != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "local_port = ${local_port}" >> $configPath
   fi
   subdomain=$(bashio::config "tunnels[${id}].subdomain")
   if [ $subdomain != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "subdomain = ${subdomain}" >> $configPath
   fi
   echo "use_encryption = true" >> $configPath
   echo "use_compression = true" >> $configPath
   sk=$(bashio::config "tunnels[${id}].sk")
   if [ $sk != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "sk = ${sk}" >> $configPath
   fi
   role=$(bashio::config "tunnels[${id}].role")
   if [ $role != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "role = ${role}" >> $configPath
   fi
   server_name=$(bashio::config "tunnels[${id}].server_name")
   if [ $server_name != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "server_name = ${server_name}" >> $configPath
   fi
   bind_addr=$(bashio::config "tunnels[${id}].bind_addr")
   if [ $bind_addr != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "bind_addr = ${bind_addr}" >> $configPath
   fi
   bind_port=$(bashio::config "tunnels[${id}].bind_port")
   if [ $bind_port != "null" ]; then
-    bashio::log.debug "Skip key"
-  else
     echo "bind_port = ${bind_port}" >> $configPath
   fi
 done
