@@ -44,4 +44,7 @@ bashio::log.info "Config file ${configPath} generated:"
 cat $configPath
 # echo "$(ls -la frp)"
 bashio::log.info "Tunneling.."
-./frp/frpc -c ${configPath}
+nohup ./frp/frpc -c ${configPath} > nohup.out &
+sleep 3
+curl http://127.0.0.1:8099/api/status -u $(bashio::config 'admin_user'):$(bashio::config 'admin_pwd') | jq
+tail -f nohup.out

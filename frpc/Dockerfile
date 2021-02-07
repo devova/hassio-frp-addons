@@ -17,7 +17,8 @@ RUN set -x \
  && curl -Lo /frp.tar.gz https://github.com/fatedier/frp/releases/download/v${BUILD_VERSION}/frp_${BUILD_VERSION}_linux_${ARCH}.tar.gz \
  && tar -xzf /frp.tar.gz \
  && rm -f /frp.tar.gz \
- && mv frp_${BUILD_VERSION}_linux_${ARCH}/ frp
+ && mv frp_${BUILD_VERSION}_linux_${ARCH}/ frp \
+ && chmod +x /run.sh
 
 
 CMD [ "/run.sh" ]
