@@ -22,7 +22,6 @@
       "53/udp": "To owerride DNS",
       "53/tcp": "To owerride DNS"
     },
-    "host_network": true,
     "options": {
       "log_level": "info",
       "token": "",
