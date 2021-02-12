@@ -45,10 +45,12 @@ for id in $(bashio::config "tunnels|keys"); do
   if [ $subdomain != "null" ]; then
     echo "subdomain = ${subdomain}" >> $configPath
   fi
-  if [$type == *"tcp"]; then
+  if [$type == "http"]; then
     echo "use_encryption = true" >> $configPath
+    echo "use_compression = true" >> $configPath
   fi
-  if [$type == "tcp"]; then
+  if [$type == "https"]; then
+    echo "use_encryption = true" >> $configPath
     echo "use_compression = true" >> $configPath
   fi
   sk=$(bashio::config "tunnels[${id}].sk")
