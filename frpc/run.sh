@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-bashio::log.info "(0.35.1-rc12) Building frpc.ini..."
+bashio::log.info "(0.35.1-rc13) Building frpc.ini..."
 configPath="/frpc.ini"
 if bashio::fs.file_exists $configPath; then
   rm $configPath
@@ -45,8 +45,10 @@ for id in $(bashio::config "tunnels|keys"); do
   if [ $subdomain != "null" ]; then
     echo "subdomain = ${subdomain}" >> $configPath
   fi
-  echo "use_encryption = true" >> $configPath
-  echo "use_compression = true" >> $configPath
+  if [$type == *"tcp"]
+    echo "use_encryption = true" >> $configPath
+    echo "use_compression = true" >> $configPath
+  fi
   sk=$(bashio::config "tunnels[${id}].sk")
   if [ $sk != "null" ]; then
     echo "sk = ${sk}" >> $configPath
