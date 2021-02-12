@@ -15,12 +15,12 @@
     "ports": {
       "8099/tcp": "8099",
       "8123/tcp": "8123",
-      "53/tcp": "53"
+      "53/udp": "53"
     },
     "ports_description": {
       "8099/tcp": "API, e.g. curl http://homeassistant.local:8099/api/status -u admin:admin",
       "8123/tcp": "Remote Home Assistant Instance",
-      "53/tcp": "To owerride DNS"
+      "53/udp": "To owerride DNS"
     },
     "options": {
       "log_level": "info",
