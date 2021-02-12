@@ -1,0 +1,39 @@
+{
+    "name": "FRP Server",
+    "version": "0.35.1",
+    "slug": "frpc",
+    "description": "A FRP server for Hass.io (self-hosted ngrok alternative)",
+    "arch": [
+      "aarch64",
+      "amd64",
+      "armhf",
+      "armv7",
+      "i386"
+    ],
+    "init": false,
+    "startup": "services",
+    "ports": {
+      "7000/udp": null,
+      "7000/tcp": 7000,
+      "80/tcp": 80,
+      "443/tcp": 443
+    },
+    "ports_description": {
+      "7000/tcp": "Server port",
+      "7001/udp": "Needed to enable P2P",
+      "80/tcp": "HTTP",
+      "443/tcp": "HTTPS"
+    },
+    "options": {
+      "log_level": "info",
+      "token": "",
+      "subdomain_host": "",
+      "max_pool_count": 100
+    },
+    "schema": {
+      "log_level": "list(crit|warn|error|info|debug)",
+      "token": "str",
+      "subdomain_host": "str",
+      "max_pool_count": "int"
+    }
+  }
