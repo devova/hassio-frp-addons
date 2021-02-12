@@ -10,11 +10,11 @@
       "armv7",
       "i386"
     ],
-    "startup": "application",
-    "boot": "auto",
+    "init": false,
+    "startup": "services",
     "ports": {
-      "8123/tcp": null,
-      "53/udp": null
+      "53/udp": null,
+      "8123/tcp": null
     },
     "ports_description": {
       "8123/tcp": "Remote Home Assistant Instance",
