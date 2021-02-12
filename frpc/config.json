@@ -65,7 +65,7 @@
       "tunnels": [
         {
           "name": "str",
-          "type": "list(https|http|tcp|udp|xtcp|stcp)",
+          "type": "list(https|http|tcp|udp|xtcp|stcp|sudp)",
           "local_ip": "str?",
           "local_port": "int?",
           "remote_port": "int?",
