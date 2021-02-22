@@ -1,7 +1,7 @@
 {
     "name": "FRP Server",
     "version": "0.35.1",
-    "slug": "frpc",
+    "slug": "frps",
     "description": "A FRP server for Hass.io (self-hosted ngrok alternative)",
     "arch": [
       "aarch64",

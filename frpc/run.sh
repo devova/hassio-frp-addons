@@ -1,13 +1,18 @@
 #!/usr/bin/with-contenv bashio
 set -e
 
-bashio::log.info "(0.35.1-rc13) Building frpc.ini..."
+bashio::log.info "(0.35.1-rc14) Building frpc.ini..."
 configPath="/frpc.ini"
 if bashio::fs.file_exists $configPath; then
   rm $configPath
 fi
 echo "[common]" >> $configPath
-echo "server_addr = $(bashio::config 'server_addr')" >> $configPath
+server_addr=$(bashio::config 'server_addr')
+if bashio::var.has_value "$(dig +short ${server_addr})"; then
+  echo "server_addr = $(dig +short ${server_addr})" >> $configPath
+else
+  echo "server_addr = ${server_addr}" >> $configPath
+fi
 echo "server_port = $(bashio::config 'server_port')" >> $configPath
 echo "bind_udp_port = $(bashio::config 'server_port')" >> $configPath
 if bashio::var.has_value "$(bashio::config 'token')"; then
